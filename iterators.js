@@ -99,6 +99,34 @@ const generatorAsync = () => {
   console.log('4. main thread done')
 }
 
+const generatorAsyncDisplay = `
+<pre class="language-javascript"><code>
+const generatorAsync = () => {
+  console.log('1. main thread started');
+  const doWhenDataReceived = value => {
+    console.log('5. next() called second time')
+    returnNextElement.next(value);
+  }
+
+  function* createFlow() {
+    const data = yield fetch('https://api.chucknorris.io/jokes/random');
+    console.log('6. generator finished running: ', data);
+  }
+
+  const returnNextElement = createFlow();
+  console.log('2. next() called fist time')
+  const futureData = returnNextElement.next().value;
+  console.log('3. promise created: ', futureData)
+
+  futureData.then(data => data.json())
+    .then(json => json.value)
+    .then(value => doWhenDataReceived(value));
+
+  console.log('4. main thread done')
+}
+</code></pre>
+`
+
 const builtInAsync = () => {
   console.log('1. main thread started')
   const getQuote = async () => {
@@ -116,11 +144,32 @@ const builtInAsync = () => {
   console.log('2. main thread done');
 }
 
+const builtInAsyncDisplay = `
+<pre class="language-javascript"><code>
+const builtInAsync = () => {
+  console.log('1. main thread started')
+  const getQuote = async () => {
+    console.log('3. async function started')
+    const response = await fetch('https://api.chucknorris.io/jokes/random');
+    console.log('4. fetch complete, json() starting')
+    const json = await response.json();
+    console.log('5. json() done')
+    const value = json.value;
+    console.log('6. asyn function finished: ', value);
+  }
+
+  getQuote();
+
+  console.log('2. main thread done');
+}
+</code></pre>
+`
+
 // export index
 export const iteratorsIndex = [
-  { header: 'Iterator', button: 'Who needs loops?', function: iterator },
-  { header: 'Infinite Generator', button: 'What does it look like?', function: infiniteGenerator },
-  { header: 'Weird Generator', button: 'Lets get weird!', function: weirdGenerator },
-  { header: 'Async... await with a Generator', button: 'Whats the wait?', function: generatorAsync },
-  { header: 'Built in Async... await', button: 'Easy mode', function: builtInAsync },
+  // { header: 'Iterator', button: 'Who needs loops?', function: iterator },
+  // { header: 'Infinite Generator', button: 'What does it look like?', function: infiniteGenerator },
+  // { header: 'Weird Generator', button: 'Lets get weird!', function: weirdGenerator },
+  { header: 'Built in Async... await', button: 'Easy mode', function: builtInAsync, display: builtInAsyncDisplay },
+  { header: 'Async... await with a Generator', button: 'Whats the wait?', function: generatorAsync, display: generatorAsyncDisplay },
 ]

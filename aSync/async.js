@@ -19,8 +19,33 @@ const funWithAsync = () => {
 
   blockFor1Sec();
 
-  console.log('I want to go first!')
+  console.log('main function finished')
 }
+
+const funWithAsyncString = `
+<pre class="language-javascript"><code>
+const funWithAsync = () => {
+  const blockFor1Sec = () => {
+    // this takes roughly a second to run
+    let result = 0;
+    for (let i = 0; i < 400000000; i++) {
+      result += i * 3.14
+    }
+    console.log('blockFor1Sec finished')
+    return result;
+  }
+
+  setTimeout(() => console.log('setTimeout finished'), 0);
+
+  Promise.resolve()
+    .then(() => console.log('Promise finished'))
+
+  blockFor1Sec();
+
+  console.log('main function finished')
+}
+</code></pre>
+`
 
 
 //resources and notes
@@ -115,8 +140,8 @@ const fetchChuckNorris = () => {
 
 //export index
 export const asyncIndex = [
-  { header: 'Fun with async', button: 'Lets race!', function: funWithAsync },
-  { header: 'Promise hunting', button: 'Do you promise?', function: lookAtPromises },
-  { header: 'Pipe with reduce', button: 'Not async?', function: pipeExample },
-  { header: 'Random Chuck Norris quote', button: 'Fetch me some fun!', function: fetchChuckNorris },
+  { header: 'Fun with async', button: 'Which finishes first?', function: funWithAsync, display: funWithAsyncString },
+  // { header: 'Promise hunting', button: 'Check out promises', function: lookAtPromises },
+  // { header: 'Pipe with reduce', button: 'Pipes', function: pipeExample },
+  // { header: 'Random Chuck Norris quote', button: 'Chain .thens', function: fetchChuckNorris },
 ]
