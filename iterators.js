@@ -103,6 +103,7 @@ const generatorAsyncDisplay = `
 <pre class="language-javascript"><code>
 const generatorAsync = () => {
   console.log('1. main thread started');
+
   const doWhenDataReceived = value => {
     console.log('5. next() called second time')
     returnNextElement.next(value);
@@ -132,11 +133,9 @@ const builtInAsync = () => {
   const getQuote = async () => {
     console.log('3. async function started')
     const response = await fetch('https://api.chucknorris.io/jokes/random');
-    console.log('4. fetch complete, json() starting')
     const json = await response.json();
-    console.log('5. json() done')
     const value = json.value;
-    console.log('6. asyn function finished: ', value);
+    console.log('4. asyn function finished: ', value);
   }
 
   getQuote();
@@ -148,14 +147,13 @@ const builtInAsyncDisplay = `
 <pre class="language-javascript"><code>
 const builtInAsync = () => {
   console.log('1. main thread started')
+
   const getQuote = async () => {
     console.log('3. async function started')
     const response = await fetch('https://api.chucknorris.io/jokes/random');
-    console.log('4. fetch complete, json() starting')
     const json = await response.json();
-    console.log('5. json() done')
     const value = json.value;
-    console.log('6. asyn function finished: ', value);
+    console.log('4. asyn function finished: ', value);
   }
 
   getQuote();
