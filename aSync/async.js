@@ -6,20 +6,19 @@ const funWithAsync = () => {
     // this takes roughly a second to run
     let result = 0;
     for (let i = 0; i < 400000000; i++) {
-      result += i * 3.14
+      result += i * 3.14;
     }
-    console.log('blockFor1Sec finished')
-    return result;
+    console.log('blockFor1Sec finished');
   }
 
   setTimeout(() => console.log('setTimeout finished'), 0); //task queue/callback queue
 
   Promise.resolve()
-    .then(() => console.log('Promise finished')) //microtask queue/job queue //older browsers may classify as tasks
+    .then(() => console.log('Promise finished')); //microtask queue/job queue //older browsers may classify as tasks
 
   blockFor1Sec();
 
-  console.log('main function finished')
+  console.log('main function finished');
 }
 
 const funWithAsyncString = `
@@ -29,20 +28,19 @@ const funWithAsync = () => {
     // this takes roughly a second to run
     let result = 0;
     for (let i = 0; i < 400000000; i++) {
-      result += i * 3.14
+      result += i * 3.14;
     }
-    console.log('blockFor1Sec finished')
-    return result;
+    console.log('blockFor1Sec finished');
   }
 
   setTimeout(() => console.log('setTimeout finished'), 0);
 
   Promise.resolve()
-    .then(() => console.log('Promise finished'))
+    .then(() => console.log('Promise finished'));
 
   blockFor1Sec();
 
-  console.log('main function finished')
+  console.log('main function finished');
 }
 </code></pre>
 `
