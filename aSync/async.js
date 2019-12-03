@@ -140,7 +140,9 @@ const fetchChuckNorris = () => {
 
 //export index
 export const asyncIndex = [
-  { header: 'Fun with async', button: 'Which finishes first?', function: funWithAsync, display: funWithAsyncString },
+  { header: 'Fun with async', button: 'Which finishes first?', function: funWithAsync, display: funWithAsyncString,
+    resources: ['https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/']
+  },
   // { header: 'Promise hunting', button: 'Check out promises', function: lookAtPromises },
   // { header: 'Pipe with reduce', button: 'Pipes', function: pipeExample },
   // { header: 'Random Chuck Norris quote', button: 'Chain .thens', function: fetchChuckNorris },
