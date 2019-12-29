@@ -150,7 +150,7 @@ const functionComponent = () => {
       setCount(count + 1)
     }
 
-    return `<div>the count is ${count}</div>`
+    return `<>the count is ${count}< />`
   }
 
   console.log(CoolComponent({ updateCounter: false }))
@@ -160,10 +160,32 @@ const functionComponent = () => {
   console.log(CoolComponent({ updateCounter: true }))
 }
 
-const escapedTemplateString = "`<div> the count is ${ count }</div>`"
+const escapedTemplateString = "<>the count is ${ count }< />"
 
 const functionComponentString = `
 <pre class="language-javascript"><code>
+//naive useState implementation
+function stateContainer() {
+  let value;
+  let firstRender = true;
+
+  function changeValue(newValue) {
+    value = newValue;
+  }
+
+  function stateInteractor(initialValue) {
+    if (firstRender) {
+      value = initialValue
+      firstRender = false
+    }
+
+    return [value, changeValue]
+  }
+
+  return stateInteractor
+}
+
+
 //let's try it out with a function component
 const useState2 = stateContainer()
 
