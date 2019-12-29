@@ -164,10 +164,13 @@ const builtInAsync = () => {
 `
 
 // export index
-export const iteratorsIndex = [
-  // { header: 'Iterator', button: 'Who needs loops?', function: iterator },
-  // { header: 'Infinite Generator', button: 'What does it look like?', function: infiniteGenerator },
-  // { header: 'Weird Generator', button: 'Lets get weird!', function: weirdGenerator },
-  { header: 'Built in Async... await', button: 'Easy mode', function: builtInAsync, display: builtInAsyncDisplay },
-  { header: 'Async... await with a Generator', button: 'Whats the wait?', function: generatorAsync, display: generatorAsyncDisplay },
-]
+export const iteratorsIndex = {
+  group: 'Interators Snipets',
+  examples: [
+    // { header: 'Iterator', button: 'Who needs loops?', function: iterator },
+    // { header: 'Infinite Generator', button: 'What does it look like?', function: infiniteGenerator },
+    // { header: 'Weird Generator', button: 'Lets get weird!', function: weirdGenerator },
+    { header: 'Built in Async... await', button: 'Easy mode', function: builtInAsync, display: builtInAsyncDisplay },
+    { header: 'Async... await with a Generator', button: 'Whats the wait?', function: generatorAsync, display: generatorAsyncDisplay },
+  ]
+}
