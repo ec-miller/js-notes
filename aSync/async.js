@@ -1,7 +1,7 @@
 // async tinkering
 // exercises: http://csbin.io/promises
 
-const funWithAsync = () => {
+function funWithAsync() {
   const blockFor1Sec = () => {
     // this takes roughly a second to run
     let result = 0;
@@ -23,25 +23,7 @@ const funWithAsync = () => {
 
 const funWithAsyncString = `
 <pre class="language-javascript"><code>
-const funWithAsync = () => {
-  const blockFor1Sec = () => {
-    // this takes roughly a second to run
-    let result = 0;
-    for (let i = 0; i < 400000000; i++) {
-      result += i * 3.14;
-    }
-    console.log('blockFor1Sec finished');
-  }
-
-  setTimeout(() => console.log('setTimeout finished'), 0);
-
-  Promise.resolve()
-    .then(() => console.log('Promise finished'));
-
-  blockFor1Sec();
-
-  console.log('main function finished');
-}
+${funWithAsync}
 </code></pre>
 `
 
@@ -71,7 +53,7 @@ const funWithAsync = () => {
 
 
 //trying to look at Promises
-const lookAtPromises = () => {
+function lookAtPromises() {
   console.log('sync code starts');
   const logAndDouble = (promiseValue) => {
     console.log('Promise resolved by first .then');
@@ -101,8 +83,15 @@ const lookAtPromises = () => {
   console.log('sync code ends')
 }
 
+const lookAtPromisesString = `
+<pre class="language-javascript"><code>
+${lookAtPromises}
+</code></pre>
+`
+
+
 //pipe reduce function
-const pipeExample = () => {
+function pipeExample() {
   const add2 = (num) => num + 2;
   const double = (num) => num * 2;
   const subtract2 = (num) => num - 2;
@@ -124,8 +113,14 @@ const pipeExample = () => {
 
 }
 
+const pipeExampleString = `
+<pre class="language-javascript"><code>
+${pipeExample}
+</code></pre>
+`
+
 // cause why not?
-const fetchChuckNorris = () => {
+function fetchChuckNorris() {
   const chuckQuotes = fetch( 'https://api.chucknorris.io/jokes/random');
   console.log('Promise at send time: ', chuckQuotes);
 
@@ -136,16 +131,56 @@ const fetchChuckNorris = () => {
   console.log('Promise after .then', chuckQuotes);
 }
 
+const fetchChuckNorrisString = `
+<pre class="language-javascript"><code>
+${fetchChuckNorris}
+</code></pre>
+`
+
 //export index
 export const asyncIndex = {
   group: 'aSync Snippets',
   examples: [
     {
-      header: 'Fun with async', button: 'Which finishes first?', function: funWithAsync, display: funWithAsyncString,
+      header: 'Fun with async',
+      buttons: [
+        {
+          name: 'Which finishes first?',
+          function: funWithAsync
+        },
+      ],
+      display: funWithAsyncString,
       resources: ['https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/']
     },
-    { header: 'Promise hunting', button: 'Check out promises', function: lookAtPromises },
-    { header: 'Pipe with reduce', button: 'Pipes', function: pipeExample },
-    { header: 'Random Chuck Norris quote', button: 'Chain .thens', function: fetchChuckNorris },
+    {
+      header: 'Promise hunting',
+      buttons: [
+        {
+          name: 'Check out promises',
+          function: lookAtPromises
+        },
+      ],
+      display: lookAtPromisesString
+    },
+    {
+      header: 'Pipe with reduce',
+      buttons: [
+        {
+          name: 'Pipes',
+          function: pipeExample
+        },
+      ],
+      display: pipeExampleString
+    },
+    {
+      header: 'Random Chuck Norris quote',
+      buttons: [
+        {
+          name: 'Chain .thens',
+          function: fetchChuckNorris
+        },
+      ],
+      display: fetchChuckNorrisString
+    }
   ]
 }

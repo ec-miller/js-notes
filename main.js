@@ -25,20 +25,24 @@ const mountExamples = examples => {
       const code = document.createElement('code');
       code.innerHTML = item.display || null;
 
-      const button = document.createElement('button');
-      button.innerHTML = item.button;
-      button.onclick = item.function;
+      const buttons = document.createElement('div');
+      item.buttons.forEach(button => {
+        const buttonEl = document.createElement('button')
+        buttonEl.onclick = () => button.function()
+        buttonEl.innerHTML = button.name
+        buttons.appendChild(buttonEl)
+      })
 
       const resources = document.createElement('div');
       resources.innerHTML = `
         <h5>Resources</h5>
-        ${ item.resources ? item.resources.map(resource => `<a target="_blank" href=${resource}>Jake's Blog</a>`) : null}
-      `
+        ${ item.resources ? item.resources.map(resource => `<a target="_blank" href=${resource}>Jake's Blog</a>`) : null }
+      `;
 
       mountPoint.appendChild(header);
       mountPoint.appendChild(code);
       mountPoint.appendChild(document.createElement('br'))
-      mountPoint.appendChild(button);
+      mountPoint.appendChild(buttons);
       if (item.resources) {
         mountPoint.appendChild(resources)
       }

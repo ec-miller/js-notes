@@ -75,7 +75,7 @@ const weirdGenerator = () => {
   console.log(get.next());
 }
 
-const generatorAsync = () => {
+function generatorAsync() {
   console.log('1. main thread started');
   const doWhenDataReceived = value => {
     console.log('5. next() called second time')
@@ -101,37 +101,14 @@ const generatorAsync = () => {
 
 const generatorAsyncDisplay = `
 <pre class="language-javascript"><code>
-const generatorAsync = () => {
-  console.log('1. main thread started');
-
-  const doWhenDataReceived = value => {
-    console.log('5. next() called second time')
-    returnNextElement.next(value);
-  }
-
-  function* createFlow() {
-    const data = yield fetch('https://api.chucknorris.io/jokes/random');
-    console.log('6. generator finished running: ', data);
-  }
-
-  const returnNextElement = createFlow();
-  console.log('2. next() called fist time')
-  const futureData = returnNextElement.next().value;
-  console.log('3. promise created: ', futureData)
-
-  futureData.then(data => data.json())
-    .then(json => json.value)
-    .then(value => doWhenDataReceived(value));
-
-  console.log('4. main thread done')
-}
+${generatorAsync}
 </code></pre>
 `
 
-const builtInAsync = () => {
+function builtInAsync() {
   console.log('1. main thread started')
   const getQuote = async () => {
-    console.log('3. async function started')
+    console.log('2. async function started')
     const response = await fetch('https://api.chucknorris.io/jokes/random');
     const json = await response.json();
     const value = json.value;
@@ -140,26 +117,12 @@ const builtInAsync = () => {
 
   getQuote();
 
-  console.log('2. main thread done');
+  console.log('3. main thread done');
 }
 
 const builtInAsyncDisplay = `
 <pre class="language-javascript"><code>
-const builtInAsync = () => {
-  console.log('1. main thread started')
-
-  const getQuote = async () => {
-    console.log('3. async function started')
-    const response = await fetch('https://api.chucknorris.io/jokes/random');
-    const json = await response.json();
-    const value = json.value;
-    console.log('4. asyn function finished: ', value);
-  }
-
-  getQuote();
-
-  console.log('2. main thread done');
-}
+${builtInAsync}
 </code></pre>
 `
 
@@ -170,7 +133,25 @@ export const iteratorsIndex = {
     // { header: 'Iterator', button: 'Who needs loops?', function: iterator },
     // { header: 'Infinite Generator', button: 'What does it look like?', function: infiniteGenerator },
     // { header: 'Weird Generator', button: 'Lets get weird!', function: weirdGenerator },
-    { header: 'Built in Async... await', button: 'Easy mode', function: builtInAsync, display: builtInAsyncDisplay },
-    { header: 'Async... await with a Generator', button: 'Whats the wait?', function: generatorAsync, display: generatorAsyncDisplay },
+    {
+      header: 'Built in Async... await',
+      buttons: [
+        {
+          name: 'Easy mode',
+          function: builtInAsync
+        },
+      ],
+      display: builtInAsyncDisplay
+    },
+    {
+      header: 'Async... await with a Generator',
+      buttons: [
+        {
+          name: 'Whats the wait?',
+          function: generatorAsync
+        },
+      ],
+      display: generatorAsyncDisplay
+    },
   ]
 }
